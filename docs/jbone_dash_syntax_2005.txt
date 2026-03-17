@@ -1,0 +1,1820 @@
+
+
+
+
+
+Object Name: Array
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+function	obj		concat( obj input );
+function	str		join( str input );
+function	obj		reverse();
+function	obj		sort();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: AudioClip
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		volume
+variable	float		pan
+variable	float		frequency
+variable	float		fade
+variable	str		url
+variable	int		transportMode
+variable	int		playbackMode
+variable	bool		removeVoice
+variable	bool		sendProgress
+variable	bool		pause_on_moving
+variable	float		progress
+function	void		Play();
+function	void		Stop();
+function	void		Pause();
+function	int		getMinutes();
+function	int		getSeconds();
+function	void		PlayOrPause();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: PeriodicAudioGroup
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	bool		isActive
+variable	float		period
+variable	float		periodNoise
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: AudioVisualizer
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		scale
+variable	float		offset
+variable	str		type
+variable	str		channel
+variable	node		source
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Background
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	vector3		skyColor
+variable	node		backdrop
+variable	bool		isBound
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Camera
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	str		mode
+variable	node		lookat
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: CameraPath
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	bool		isActive
+variable	bool		backward
+variable	float		interval
+variable	node		position
+variable	node		orientation
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Config
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+function	void		SoftReset();
+function	void		HardReset();
+function	void		PowerOff();
+function	void		PowerCycle();
+function	int		GetInternalTemp();
+function	void		SetLED( int input );
+function	void		SetLEDTo( int input );
+function	void		CycleUpLED();
+function	void		CycleDownLED();
+function	void		SetFanSpeed( int input );
+function	int		GetFanSpeed();
+function	int		GetCPUTemp();
+function	void		ReStartDash();
+function	void		ChangeSkin( str input );
+function	str		GetNick();
+function	void		SetNick( str input );
+function	str		GetVideoChip();
+function	str		GetModChip();
+function	str		GetVersion();
+function	float		GetCPUUsage();
+function	int		FlashChip( str input );
+function	int		DebugOutput( str input );
+function	int		GetLanguage();
+function	void		SetLanguage( int input );
+function	int		GetGamePCFlags();
+function	void		SetGamePCFlags( int input );
+function	int		GetMoviePCFlags();
+function	void		SetMoviePCFlags( int input );
+function	str		GetLaunchReason();
+function	int		GetLaunchContext();
+function	int		GetLaunchParameter1();
+function	int		GetLaunchParameter2();
+function	int		CanDriveBeCleanup( int input );
+function	void		BackToLauncher();
+function	int		Get480Support();
+function	void		Set480Support( int input );
+function	int		Get720Support();
+function	void		Set720Support( int input );
+function	int		Get1080Support();
+function	void		Set1080Support( int input );
+function	int		GetPAL60Support();
+function	void		SetPAL60Support( int input );
+function	str		GetAVPackType();
+function	str		GetAVRegion();
+function	str		GetGameRegion();
+function	int		GetAutoOff();
+function	void		SetAutoOff( int input );
+function	void		SetAutoOffTime( float input );
+function	int		GetVideoMode();
+function	void		SetVideoMode( int input );
+function	int		GetAudioMode();
+function	void		SetAudioMode( int input );
+function	int		GetDolbyDigitalSupport();
+function	void		SetDolbyDigitalSupport( int input );
+function	int		GetDTSSupport();
+function	void		SetDTSSupport( int input );
+function	int		CheckParentPassword( str input );
+function	void		SetParentPassword( str input );
+function	int		GetTimeZone();
+function	void		SetTimeZone( int input );
+function	int		GetDSTAllowed();
+function	int		GetDST();
+function	void		SetDST( int input );
+function	int		ForceSetLanguage();
+function	int		ForceSetTimeZone();
+function	int		ForceSetClock();
+function	str		GetRecoveryKey();
+function	str		GetROMVersion();
+function	str		GetXdashVersion();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: CopyDestination
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	node		pod
+variable	node		panelMU
+variable	node		panelMUHilite
+variable	node		panelText
+variable	node		panelTextHilite
+variable	node		console
+variable	node		memoryUnit
+variable	int		curDevUnit
+variable	int		selDevUnit
+variable	int		sourceDevUnit
+variable	float		spacing
+variable	bool		isActive
+variable	int		select
+function	void		selectUp();
+function	void		selectDown();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Date
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+function	int		getDate();
+function	int		getDay();
+function	int		getFullYear();
+function	int		getHours();
+function	int		getMilliseconds();
+function	int		getMinutes();
+function	int		getMonth();
+function	int		getSeconds();
+function	int		getUTCDate();
+function	int		getUTCDay();
+function	int		getUTCFullYear();
+function	int		getUTCHours();
+function	int		getUTCMilliseconds();
+function	int		getUTCMinutes();
+function	int		getUTCMonth();
+function	int		getUTCSeconds();
+function	str		toGMTString();
+function	str		toLocaleString();
+function	str		toUTCString();
+function	int		isLeapYear( int input );
+function	int		getDaysInMonth( int input );
+function	int		getDaysInMonth( int inputa, int inputb, int inputc );
+function	void		SetSystemClock();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: DiscDrive
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	str		discType
+variable	bool		locked
+variable	bool		resetOnEject
+function	int		getTrackCount();
+function	str		FormatTotalTime();
+function	str		FormatTrackTime( int input );
+function	void		LaunchDisc();
+function	void		OpenTray();
+function	void		CloseTray();
+function	int		GetTrayState();
+function	str		getArtist();
+function	str		getTitle();
+function	str		getTrackName( int input );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: DotField
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		spacing
+variable	float		hSpeed
+variable	float		vSpeed
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: DVDPlayer
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		speed
+variable	int		title
+variable	int		chapter
+variable	int		hours
+variable	int		minutes
+variable	int		seconds
+variable	int		frames
+variable	int		videoModePreferrence
+variable	int		parentalLevel
+variable	int		audioStream
+variable	int		left
+variable	int		top
+variable	int		width
+variable	int		height
+variable	bool		closedCaption
+variable	int		subTitle
+variable	int		domain
+variable	int		angle
+variable	int		angleCount
+variable	int		playbackMode
+variable	int		audioFormat
+variable	int		audioChannels
+variable	str		audioLanguage
+variable	str		subTitleLanguage
+variable	int		abRepeatState
+variable	int		number
+variable	int		scanSpeed
+variable	bool		scanSlow
+variable	bool		autoStop
+variable	bool		bScanBackward
+variable	bool		isActive
+function	void		ReturnToDash();
+function	void		init();
+function	void		play();
+function	void		stop();
+function	void		goUp();
+function	void		pause();
+function	void		playOrPause();
+function	void		selectUp();
+function	void		selectDown();
+function	void		selectRight();
+function	void		selectLeft();
+function	void		activate();
+function	void		nextAudioStream();
+function	void		nextAngle();
+function	void		startChapter();
+function	void		nextChapter();
+function	void		prevChapter();
+function	void		menu();
+function	void		titleMenu();
+function	void		nextSubtitle();
+function	void		forwardScan();
+function	void		backwardScan();
+function	void		stopScan();
+function	void		eject();
+function	void		close();
+function	void		setScale( float input );
+function	void		setZoomPos( float input );
+function	void		setZoomPos( float inputa, float inputb );
+function	void		frameAdvance();
+function	void		frameReverse();
+function	int		isUOPValid( int input );
+function	void		abRepeat();
+function	void		digit( int input );
+function	void		refreshAudioSettings();
+function	int		isPlaybackDomain();
+function	void		enableWideScreen();
+function	void		disableWideScreen();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Palette
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	int		type
+variable	float		changePeriod
+variable	float		changePeriodRandomness
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: DynamicTexture
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	child		children
+variable	int		size
+variable	bool		erase
+variable	float		fps
+variable	node		palette
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: ImageFader
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	int		type
+variable	float		changePeriod
+variable	float		changePeriodRandomness
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: File
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	str		name
+variable	str		type
+variable	str		path
+variable	int		length
+variable	node		date
+function	str		readText();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Folder
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	str		path
+variable	str		name
+variable	node		files
+variable	node array	files
+variable	node		subFolders
+variable	node array	subFolders
+function	void		sortByName();
+function	void		sortByType();
+function	void		sortByDate();
+function	void		sortByLength();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: SavedGameGrid
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	node		pod
+variable	node		podRing
+variable	node		podSavePanel
+variable	node		podSoundtrackPanel
+variable	node		podHilite
+variable	node		MUheader
+variable	node		MUhiliteHeader
+variable	node		firstMURow
+variable	node		header
+variable	node		hiliteHeader
+variable	node		firstRow
+variable	node		secondRow
+variable	node		otherRow
+variable	int		renderIcons
+variable	int		iconsPerRow
+variable	float		scroll
+variable	int		curTitle
+variable	node		smallIcon
+variable	node		SavedIconPanel
+variable	node		SoundtrackIconPanel
+variable	node		iconRing
+variable	node		smallIconHilite
+variable	float		smallIconSpacing
+variable	int		curSavedGame
+variable	int		iconRowScroll
+variable	node		moreUp
+variable	node		moreDown
+variable	bool		detachIcon
+variable	bool		isActive
+variable	int		curDevUnit
+variable	float		copyProgress
+variable	int		freeBlocks
+variable	int		gameBlocks
+variable	int		nPrefColumn
+function	void		selectUp();
+function	void		selectDown();
+function	void		selectLeft();
+function	void		selectRight();
+function	void		setSelImage();
+function	str		FormatSavedGameName();
+function	str		FormatSavedGameTime();
+function	str		FormatSavedGameSize();
+function	str		FormatTitleSize();
+function	str		FormatTotalBlocks();
+function	int		GetTotalBlocks();
+function	str		FormatFreeBlocks();
+function	int		CanDetachIcon();
+function	int		GetSavedGameCount( int input );
+function	str		GetTitleName( int input );
+function	str		GetTitleID( int input );
+function	void		StartCopy( int input );
+function	void		StartDelete();
+function	int		DoesSavedGameExists( int input );
+function	str		GetSavedGamePath( int input );
+function	str		GetSavedGamePath( int inputa, int inputb );
+function	int		CanCopy();
+function	int		IsSoundtrackSelected();
+function	int		IsDevUnitReady( int input );
+function	int		GetTitleCount();
+function	str		GetUpdateString();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: GameRipper
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	bool		readyToCopy
+variable	float		progress
+variable	float		totalprogress
+variable	float		fileCount
+variable	float		folderCount
+variable	float		remainingFileCount
+variable	float		remainingFolderCount
+variable	float		totalPercentCompleted
+variable	float		currentPercentCompleted
+variable	str		sourcePath
+variable	str		destinationPath
+variable	str		installToPath
+variable	str		currentFile
+variable	str		totalBytes
+variable	str		copiedBytes
+variable	str		titleSize
+variable	str		titleID
+variable	str		titleName
+function	void		Start();
+function	void		Reset();
+function	void		Cancel();
+function	void		SetSource( str input );
+function	void		SetDestination( str input );
+function	int		GetDiskInfo();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Group
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	child		children
+variable	int		current
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Transform
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	vector3		center//NOTE:Ignored!
+variable	vector4		scaleOrientation//NOTE:Ignored!
+variable	vector3		scale
+variable	vector4		rotation
+variable	vector3		translation
+variable	float		fade
+variable	bool		moving
+variable	float		alpha
+function	void		SetScale( float input );
+function	void		SetScale( float inputa, float inputb );
+function	void		SetScale( float inputa, float inputb, float inputc );
+function	void		SetScaleX( float input );
+function	void		SetScaleY( float input );
+function	void		SetScaleZ( float input );
+function	float		GetScaleX();
+function	float		GetScaleY();
+function	float		GetScaleZ();
+function	void		SetTranslation( float input );
+function	void		SetTranslation( float inputa, float inputb );
+function	void		SetTranslation( float inputa, float inputb, float inputc );
+function	void		SetTranslationX( float input );
+function	void		SetTranslationY( float input );
+function	void		SetTranslationZ( float input );
+function	float		GetTranslationX();
+function	float		GetTranslationY();
+function	float		GetTranslationZ();
+function	void		SetRotation( float input );
+function	void		SetRotation( float inputa, float inputb );
+function	void		SetRotation( float inputa, float inputb, float inputc );
+function	void		SetRotation( float inputa, float inputb, float inputc, float inputd );
+function	void		SetRotationX( float input );
+function	void		SetRotationY( float input );
+function	void		SetRotationZ( float input );
+function	void		SetRotationR( float input );
+function	float		GetRotationX();
+function	float		GetRotationY();
+function	float		GetRotationZ();
+function	float		GetRotationR();
+function	void		SetAlpha( float input );
+function	void		SetCenter( float input );
+function	void		SetCenter( float inputa, float inputb );
+function	void		SetCenter( float inputa, float inputb, float inputc );
+function	void		DisappearAfter( float input );
+function	void		SetScaleOrientation( float input );
+function	void		SetScaleOrientation( float inputa, float inputb );
+function	void		SetScaleOrientation( float inputa, float inputb, float inputc );
+function	void		SetScaleOrientation( float inputa, float inputb, float inputc, float inputd );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Inline
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	str		url
+variable	bool		preload
+variable	bool		fadeInDelayLoad
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Spinner
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		rpm
+variable	vector3		axis
+variable	float		angle
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Waver
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		field
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Layout
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	vector3		direction
+variable	float		spacing
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Switch
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	int		whichChoice
+variable	node		choice
+variable	node array	choice
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Billboard
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	vector3		axisOfRotation
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: HUD
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Picture
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		top
+variable	float		left
+variable	float		width
+variable	float		height
+variable	node		texture
+variable	float		transparency
+variable	float		fade
+variable	color		color
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: PositionInterpolator
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float array		key
+variable	vector3		keyValue
+variable	vector3 array	keyValue
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: OrientationInterpolator
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float array		key
+variable	vector4		keyValue
+variable	vector4 array	keyValue
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Joystick
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	bool		isBound
+variable	float		frequency
+variable	float		hat
+variable	float		xaxis
+variable	float		yaxis
+variable	float		xaxis2
+variable	float		yaxis2
+variable	float		a
+variable	float		b
+variable	float		x
+variable	float		y
+variable	float		black
+variable	float		white
+variable	float		left
+variable	float		right
+variable	float		leftThumb
+variable	float		rightThumb
+variable	float		start
+variable	float		back
+variable	str		secretKey
+variable	bool		enableSecretKey
+variable	bool		enableGamepad
+variable	bool		enableRemote
+function	void		EnableGlobalInput( int input );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Keyboard
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	node		keys
+variable	node array	keys
+variable	node		frame
+variable	node		text
+variable	node		control
+variable	int		mode
+variable	int		jmode
+variable	bool		shift
+variable	bool		caps
+variable	str		string
+function	void		selectKey( int input );
+function	void		selectKey( int inputa, int inputb );
+function	void		selectUp();
+function	void		selectDown();
+function	void		selectLeft();
+function	void		selectRight();
+function	void		activate();
+function	void		Backspace();
+function	void		Delete();
+function	void		CursorLeft();
+function	void		CursorRight();
+function	void		Shift();
+function	void		CycleMode();
+function	void		Insert( str input );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Layer
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	node		viewpoint
+variable	node		navigationInfo
+variable	float		fade
+variable	float		transparency
+variable	vector4		maskColor
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Level
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	node		control
+variable	node		tunnel
+variable	node		path
+variable	node		shell
+variable	str		archive
+variable	bool		unloadable
+variable	bool		fade
+variable	str		name
+variable	int		numMenuItems
+function	void		GoTo();
+function	void		GoBackTo();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Light
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	int		number
+variable	vector3		Position
+variable	vector3		Lookat
+variable	color		Ambient
+variable	color		Diffuse
+variable	color		Specular
+variable	float		Range
+variable	bool		Visible
+variable	str		Type
+function	void		LightOn();
+function	void		LightOff();
+function	void		LookAt( float input );
+function	void		LookAt( float inputa, float inputb );
+function	void		LookAt( float inputa, float inputb, float inputc );
+function	void		Position( float input );
+function	void		Position( float inputa, float inputb );
+function	void		Position( float inputa, float inputb, float inputc );
+function	void		SetPosition( float input );
+function	void		SetPosition( float inputa, float inputb );
+function	void		SetPosition( float inputa, float inputb, float inputc );
+function	void		SetLookAt( float input );
+function	void		SetLookAt( float inputa, float inputb );
+function	void		SetLookAt( float inputa, float inputb, float inputc );
+function	void		SetRange( float input );
+function	void		SetType( str input );
+function	void		SetAmbient( float input );
+function	void		SetAmbient( float inputa, float inputb );
+function	void		SetAmbient( float inputa, float inputb, float inputc );
+function	void		SetAmbient( float inputa, float inputb, float inputc, float inputd );
+function	void		SetDiffuse( float input );
+function	void		SetDiffuse( float inputa, float inputb );
+function	void		SetDiffuse( float inputa, float inputb, float inputc );
+function	void		SetDiffuse( float inputa, float inputb, float inputc, float inputd );
+function	void		SetSpecular( float input );
+function	void		SetSpecular( float inputa, float inputb );
+function	void		SetSpecular( float inputa, float inputb, float inputc );
+function	void		SetSpecular( float inputa, float inputb, float inputc, float inputd );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Translator
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+function	void		SetLanguage( int input );
+function	str		Translate( str input );
+function	str		GetLanguageCode();
+function	str		GetDateSeparator();
+function	str		FormatNumber( int input );
+function	int		GetTimeZoneCount();
+function	str		GetTimeZoneText( int input );
+function	str		TranslateStripColon( str input );
+function	float		abs( float input );
+function	float		acos( float input );
+function	float		asin( float input );
+function	float		atan( float input );
+function	float		atan2( float input );
+function	float		atan2( float inputa, float inputb );
+function	float		ceil( float input );
+function	float		cos( float input );
+function	float		exp( float input );
+function	float		floor( float input );
+function	float		log( float input );
+function	float		max( float input );
+function	float		max( float inputa, float inputb );
+function	float		min( float input );
+function	float		min( float inputa, float inputb );
+function	float		pow( float input );
+function	float		pow( float inputa, float inputb );
+function	float		random( float input );
+function	float		random();
+function	float		round( float input );
+function	float		sin( float input );
+function	float		sqrt( float input );
+function	float		tan( float input );
+function	str		itoa( int input );
+function	int		atoi( str input );
+function	obj		ftoa( float input );
+function	obj		atof( str input );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: MaxMaterial
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	str		name
+variable	float		param
+variable	bool		changed
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: MemoryMonitor
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	int		curDevUnit
+variable	int		invalidDevUnit
+variable	bool		blockInsertion
+variable	bool		enumerationOn
+variable	bool		BeInMemoryMenu
+function	void		selectUp();
+function	void		selectDown();
+function	void		selectLeft();
+function	void		selectRight();
+function	int		selectDevUnit( int input );
+function	str		FormatDeviceName( int input );
+function	str		FormatTotalBlocks();
+function	str		FormatFreeBlocks( int input );
+function	int		GetTotalFreeBlocks( int input );
+function	int		HaveDeviceTop( int input );
+function	int		HaveDeviceBottom( int input );
+function	float		GetFreeTotalRatio( int input );
+function	void		SetMUName( int input );
+function	void		SetMUName( int inputa, str inputb );
+function	void		FormatMemoryUnit( int input );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Mesh
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	str		url
+variable	bool		wireFrame
+variable	int		renderMode
+function	void		load( str input );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: MusicCollection
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		copyProgress
+variable	int		error
+function	int		GetSoundtrackCount();
+function	int		GetSoundtrackID( int input );
+function	int		GetSoundtrackIndexFromID( int input );
+function	str		GetSoundtrackName( int input );
+function	str		FormatSoundtrackTime( int input );
+function	int		GetSoundtrackSongCount( int input );
+function	str		GetSoundtrackSongID( int input );
+function	str		GetSoundtrackSongID( int inputa, int inputb );
+function	str		GetSoundtrackSongName( int input );
+function	str		GetSoundtrackSongName( int inputa, int inputb );
+function	str		FormatSoundtrackSongTime( int input );
+function	str		FormatSoundtrackSongTime( int inputa, int inputb );
+function	int		AddSoundtrack( str input );
+function	void		DeleteSoundtrack( int input );
+function	void		ClearCopyList( int input );
+function	void		AddSongToCopyList( int input );
+function	void		AddSongToCopyList( int inputa, int inputb );
+function	void		StartCopy( int input );
+function	void		SetSongName( int input );
+function	void		SetSongName( int inputa, int inputb );
+function	void		SetSongName( int inputa, int inputb, str inputc );
+function	void		SetSoundtrackName( int input );
+function	void		SetSoundtrackName( int inputa, str inputb );
+function	void		MoveSongUp( int input );
+function	void		MoveSongUp( int inputa, int inputb );
+function	void		MoveSongDown( int input );
+function	void		MoveSongDown( int inputa, int inputb );
+function	void		DeleteSong( int input );
+function	void		DeleteSong( int inputa, int inputb );
+function	str		CreateSoundtrackName( str input );
+function	str		GetUpdateString();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: NavigationInfo
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	bool		isBound
+variable	vector3		avatarSize
+variable	bool		headlight
+variable	float		speed
+variable	str		type
+variable	float		visibilityLimit
+variable	node		shape
+variable	bool		visible
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: TimeDepNode
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	bool		loop
+variable	float		startTime
+variable	float		stopTime
+variable	bool		isActive
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Recovery
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		recoveryProgress
+function	void		StartRecovery();
+function	void		FinishRecovery();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Vector3
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		x
+variable	float		y
+variable	float		z
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: SavedGameGrid
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	node		pod
+variable	node		podRing
+variable	node		podSavePanel
+variable	node		podSoundtrackPanel
+variable	node		podHilite
+variable	node		MUheader
+variable	node		MUhiliteHeader
+variable	node		firstMURow
+variable	node		header
+variable	node		hiliteHeader
+variable	node		firstRow
+variable	node		secondRow
+variable	node		otherRow
+variable	int		renderIcons
+variable	int		iconsPerRow
+variable	float		scroll
+variable	int		curTitle
+variable	node		smallIcon
+variable	node		SavedIconPanel
+variable	node		SoundtrackIconPanel
+variable	node		iconRing
+variable	node		smallIconHilite
+variable	float		smallIconSpacing
+variable	int		curSavedGame
+variable	int		iconRowScroll
+variable	node		moreUp
+variable	node		moreDown
+variable	bool		detachIcon
+variable	bool		isActive
+variable	int		curDevUnit
+variable	float		copyProgress
+variable	int		freeBlocks
+variable	int		gameBlocks
+variable	int		nPrefColumn
+function	void		selectUp();
+function	void		selectDown();
+function	void		selectLeft();
+function	void		selectRight();
+function	void		setSelImage();
+function	str		FormatSavedGameName();
+function	str		FormatSavedGameTime();
+function	str		FormatSavedGameSize();
+function	str		FormatTitleSize();
+function	str		FormatTotalBlocks();
+function	int		GetTotalBlocks();
+function	str		FormatFreeBlocks();
+function	int		CanDetachIcon();
+function	int		GetSavedGameCount( int input );
+function	str		GetTitleName( int input );
+function	str		GetTitleID( int input );
+function	void		StartCopy( int input );
+function	void		StartDelete();
+function	int		DoesSavedGameExists( int input );
+function	str		GetSavedGamePath( int input );
+function	str		GetSavedGamePath( int inputa, int inputb );
+function	int		CanCopy();
+function	int		IsSoundtrackSelected();
+function	int		IsDevUnitReady( int input );
+function	int		GetTitleCount();
+function	str		GetUpdateString();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Screen
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	int		width
+variable	int		height
+variable	bool		fullScreen
+variable	bool		showFramerate
+variable	str		title
+variable	str		icon
+variable	str		border
+variable	bool		letterbox
+variable	bool		wideScreen
+variable	float		brightness
+function	void		TakeScreenShot();
+function	void		WireFrameStart();
+function	void		WireFrameStop();
+function	void		MotionStart();
+function	void		MotionStop();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: ScreenSaver
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	bool		enabled
+variable	bool		isActive
+variable	bool		isActive2
+variable	bool		isActive3
+variable	bool		isActive4
+variable	bool		isActive5
+variable	bool		isActive6
+variable	bool		isActive7
+variable	bool		isActive8
+variable	bool		isActive9
+variable	bool		isActive10
+variable	float		delay
+variable	float		delay2
+variable	float		delay3
+variable	float		delay4
+variable	float		delay5
+variable	float		delay6
+variable	float		delay7
+variable	float		delay8
+variable	float		delay9
+variable	float		delay10
+function	void		reset();
+function	void		StartAfter( float input );
+function	void		SetDelay2( float input );
+function	void		SetDelay3( float input );
+function	void		SetDelay4( float input );
+function	void		SetDelay5( float input );
+function	void		SetDelay6( float input );
+function	void		SetDelay7( float input );
+function	void		SetDelay8( float input );
+function	void		SetDelay9( float input );
+function	void		SetDelay10( float input );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Settings
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	str		file
+variable	str		section
+function	str		GetValue( str input );
+function	void		SetValue( str input );
+function	void		SetValue( str inputa, str inputb );
+function	str		GetIniValue( str input );
+function	void		SetIniSection( str input );
+function	void		SetIniValue( str input );
+function	void		SetIniValue( str inputa, str inputb );
+function	void		CloseIniFile();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Shape
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	node		appearance
+variable	node		geometry
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Appearance
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	node		material
+variable	node		texture
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Material
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		ambientIntensity
+variable	color		diffuseColor
+variable	color		emissiveColor
+variable	float		shininess
+variable	color		specularColor
+variable	float		transparency
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Box
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	vector3		size
+variable	bool		sky
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Sphere
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		radius
+variable	int		slices
+variable	int		stacks
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Skin
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+function	int		SetSkin( str input );
+function	void		SetLanguage( int input );
+function	int		GetGamePCFlags();
+function	void		SetGamePCFlags( int input );
+function	int		GetMoviePCFlags();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: StarField
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	int		stars
+variable	float		speed
+function	int		length();
+function	int		charCodeAt( int input );
+function	str		charAt( int input );
+function	str		concat( str input );
+function	str		toLowerCase();
+function	str		toUpperCase();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Text
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	str		text
+variable	str		font
+variable	str		justify
+variable	float		deviation
+variable	float		extrusion
+variable	float		width
+variable	bool		translate
+variable	float		height
+variable	float		scroll
+variable	float		scrollRate
+variable	float		scrollDelay
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Texture
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	bool		repeatS
+variable	bool		repeatT
+variable	bool		titleImage
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: ImageTexture
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	str		url
+variable	bool		alpha
+variable	bool		fromfile
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: TimeSensor
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		cycleInterval
+variable	bool		enabled
+variable	float		cycleTime
+variable	float		fraction_changed
+variable	float		time
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: TitleMenu
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	int		titleCount
+function	void		Refresh();
+function	void		CleanUp();
+function	void		SetPath( str input );
+function	str		GetPath();
+function	void		SetMenuName( str input );
+function	str		GetMenuName();
+function	int		GetTitleCount();
+function	str		GetTitleName( int input );
+function	str		GetTitleID( int input );
+function	str		GetTitlePath( int input );
+function	str		GetTitleHome( int input );
+function	str		GetTitleXbeName( int input );
+function	str		GetIconPath( int input );
+function	void		LaunchTitle( int input );
+function	int		GetTitleSize( int input );
+function	str		GetTitleSizeString( int input );
+function	int		IsTitleLocked( int input );
+function	void		LockTitle( int input );
+function	void		UnLockTitle( int input );
+function	int		IsTitleFavorite( int input );
+function	void		AddFavorite( int input );
+function	void		RemoveFavorite( int input );
+function	str		GetTitleRegion( int input );
+function	str		GetTitleRating( int input );
+function	str		GetTitleMedia( int input );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: TitleGrid
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	bool		iconsVisible
+variable	node		pod
+variable	node		podRing
+variable	node		podSavePanel
+variable	node		podSoundtrackPanel
+variable	node		podHilite
+variable	node		MUheader
+variable	node		MUhiliteHeader
+variable	node		firstMURow
+variable	node		header
+variable	node		hiliteHeader
+variable	node		firstRow
+variable	node		secondRow
+variable	node		otherRow
+variable	int		renderIcons
+variable	int		iconsPerRow
+variable	float		scroll
+variable	int		curTitle
+variable	node		smallIcon
+variable	node		SavedIconPanel
+variable	node		SoundtrackIconPanel
+variable	node		iconRing
+variable	node		smallIconHilite
+variable	float		smallIconSpacing
+variable	int		curSavedGame
+variable	int		iconRowScroll
+variable	node		moreUp
+variable	node		moreDown
+variable	bool		detachIcon
+variable	bool		isActive
+variable	int		curDevUnit
+variable	float		copyProgress
+variable	int		freeBlocks
+variable	int		gameBlocks
+variable	int		nPrefColumn
+function	void		SetMenuName( str input );
+function	str		GetMenuName();
+function	void		SetPath( str input );
+function	void		UseMenu( obj input );
+function	void		ExitMenu();
+function	void		Refresh();
+function	void		LaunchTitle( int input );
+function	str		GetTitlePath( int input );
+function	str		GetTitleHome( int input );
+function	str		GetTitleSize( int input );
+function	str		GetTitleXbeName( int input );
+function	void		selectUp();
+function	void		selectDown();
+function	void		selectLeft();
+function	void		selectRight();
+function	void		setSelImage();
+function	str		FormatSavedGameName();
+function	str		FormatSavedGameTime();
+function	str		FormatSavedGameSize();
+function	str		FormatTitleSize();
+function	str		FormatTotalBlocks();
+function	int		GetTotalBlocks();
+function	str		FormatFreeBlocks();
+function	int		CanDetachIcon();
+function	int		GetSavedGameCount( int input );
+function	str		GetTitleName( int input );
+function	str		GetTitleID( int input );
+function	void		StartDelete();
+function	str		GetSavedGamePath( int input );
+function	str		GetSavedGamePath( int inputa, int inputb );
+function	int		CanCopy();
+function	int		GetTitleCount();
+function	str		GetUpdateString();
+function	int		GetTitleLock( int input );
+function	int		GetTitleFavorite( int input );
+function	str		GetTitleRegion( int input );
+function	str		GetTitleRating( int input );
+function	str		GetTitleMedia( int input );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Viewpoint
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		fieldOfView
+variable	bool		jump
+variable	bool		isBound
+variable	vector3		position
+variable	vector4		orientation
+variable	str		description
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: VideoClip
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+function	int		SetVideo( str input );
+function	void		VideoPlay();
+function	void		VideoLoop();
+function	void		VideoStop();
+function	void		VideoPause();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Xbe
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	str		titleId
+variable	str		fileName
+variable	str		mediaFlag
+variable	str		titleName
+variable	str		gameRegion
+variable	str		internalName
+function	int		Backup();
+function	int		BackupExists();
+function	int		RestoreBackup();
+function	str		GetInternalName();
+function	str		GetTitleId();
+function	str		GetMediaFlag();
+function	str		GetTitleName();
+function	str		GetGameRegion();
+function	str		GetGameRating();
+function	void		SetTitleId( str input );
+function	int		SetFile( str input );
+function	void		SetMediaFlag( int input );
+function	void		SetTitleName( str input );
+function	void		SetInternalName( str input );
+function	void		SaveTitleImage( str input );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: XboxNetworkUser
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	str		UserName
+variable	str		Password
+function	int		SetPassword( str input );
+function	int		SetUserName( str input );
+function	void		ChangePassword( str input );
+function	void		ChangePassword( str inputa, str inputb );
+function	void		ChangeUserName( str input );
+function	void		ChangeUserName( str inputa, str inputb );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: XboxNetwork
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	str		ipaddress
+variable	str		gateway
+variable	str		subnet
+variable	str		adresstype
+variable	bool		NetServicesRunning
+variable	bool		FTPServicesRunning
+variable	bool		EthernetDetected
+variable	int		NetworkUserCount
+function	str		GetXboxIP();
+function	str		GetXboxIPType();
+function	int		SetXboxIP( str input );
+function	int		SetXboxIPType( str input );
+function	str		GetXboxGateway();
+function	int		SetXboxGateway( str input );
+function	str		GetXboxSubnet();
+function	int		SetXboxSubnet( str input );
+function	str		GetLinkStatus();
+function	str		GetLinkType();
+function	str		GetMACAddress();
+function	void		AddNetworkUser( str input );
+function	void		AddNetworkUser( str inputa, str inputb );
+function	void		RemoveNetworkUser( str input );
+function	void		RemoveNetworkUser( str inputa, str inputb );
+function	int		StartServices();
+function	int		StopServices();
+function	int		ReStartServices();
+function	int		StartFTPServices();
+function	int		StopFTPServices();
+function	int		ReStartFTPServices();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: Fog
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	vector3		Position
+variable	vector3		Lookat
+variable	color		Ambient
+variable	color		Diffuse
+variable	color		Specular
+variable	float		Range
+variable	bool		Visible
+function	void		Start();
+function	void		Stop();
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: HardDrive
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	float		progress
+variable	float		queueprogress
+variable	bool		showProgress
+function	obj		GetFileSizeString( str input );
+function	int		GetFreeSpace( str input );
+function	int		GetTotalSpace( str input );
+function	void		RefreshRoot();
+function	int		FileExists( str input );
+function	int		FolderExists( str input );
+function	int		FormatThisDrive( str input );
+function	int		FormatNewDrive();
+function	int		GetThisFileSize( str input );
+function	int		GetThisFileBlocks( str input );
+function	int		GetThisDirectoryBlocks( str input );
+function	str		GetThisDirectorySize( str input );
+function	void		MoveThisFile( str input );
+function	void		MoveThisFile( str inputa, str inputb );
+function	void		MoveThisDirectory( str input );
+function	void		MoveThisDirectory( str inputa, str inputb );
+function	int		DeleteThisFile( str input );
+function	int		DeleteThisDirectory( str input );
+function	void		CopyThisFile( str input );
+function	void		CopyThisFile( str inputa, str inputb );
+function	void		CopyThisDirectory( str input );
+function	void		CopyThisDirectory( str inputa, str inputb );
+function	void		RenameThisFile( str input );
+function	void		RenameThisFile( str inputa, str inputb );
+function	void		RenameThisDirectory( str input );
+function	void		RenameThisDirectory( str inputa, str inputb );
+function	int		CreateThisDirectory( str input );
+function	int		RemoveThisDirectory( str input );
+function	void		ExecuteFile( str input );
+function	int		DoesFExist();
+function	int		DoesGExist();
+function	int		GetPartitionCount();
+function	int		GetPartitionNumber( int input );
+function	str		GetPartitionLetter( int input );
+function	str		GetPartitionPath( int input );
+function	int		GetPartitionSize( int input );
+function	int		GetPartitionFree( int input );
+function	int		GetPartitionUsed( int input );
+function	int		Unlock( str input );
+function	int		Lock( str input );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: MainMenu
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	int		currentItem
+variable	int		itemCount
+variable	bool		isVisible
+variable	bool		inMainMenu
+function	int		GetItemCount();
+function	void		SetItemCount( int input );
+function	str		GetText( int input );
+function	str		GetType( int input );
+function	str		GetMenu( int input );
+function	int		GetTitleMenu( int input );
+function	str		GetXbePath( int input );
+function	void		SetText( int input );
+function	void		SetText( int inputa, str inputb );
+function	void		SetType( int input );
+function	void		SetType( int inputa, str inputb );
+function	void		SetMenu( int input );
+function	void		SetMenu( int inputa, str inputb );
+function	void		SetTitleMenu( int input );
+function	void		SetTitleMenu( int inputa, int inputb );
+function	void		SetXbePath( int input );
+function	void		SetXbePath( int inputa, str inputb );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: TitleMenuManager
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	int		currentMenu
+variable	int		menuCount
+function	int		GetItemCount();
+function	void		SetItemCount( int input );
+function	str		GetName( int input );
+function	str		GetPath( int input );
+function	int		GetMenuByName( str input );
+function	void		SetName( int input );
+function	void		SetName( int inputa, str inputb );
+function	void		SetPath( int input );
+function	void		SetPath( int inputa, str inputb );
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: FontManager
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	int		fontCount
+____________________________________________________________________________________________________
+
+
+
+
+
+Object Name: TTFText
+____________________________________________________________________________________________________
+member type	type/return	name/syntax
+____________________________________________________________________________________________________
+variable	str		text
+variable	str		font
+variable	float		Red
+variable	float		Green
+variable	float		Blue
+variable	float		Alpha
+variable	int		size
+variable	int		X
+variable	int		Y
+
+
+
+Built In Functions
+____________________________________________________________________________________________________
+void EnableInput( bool enabled );
+void eval( str somefunction );
+void launch( str xbename, str xbepath );
+void alert( str texttoalert );
+void log( str texttolog );
+
+
+
+Built In Text Shortcuts
+____________________________________________________________________________________________________
+"<clock12>"	displays time in 12 hour clock format
+"<clock24>"	displays time in 24 hour clock format
+"<date>"	displays the current date in mm.dd.yy format
+"<datetime>"	displays the current date and time
+"<ip>"		displays the xbox's current ip
+"<nick>"	displays the xbox's current nickname
