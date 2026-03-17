@@ -8,7 +8,7 @@ The dashboard loads `default.xip` at startup, which contains the root scene and 
 
 ## Archive Structure
 
-From Microsoft's original `xip.h` (found in the Xbox source tree at `xbox/ui/private/XIP/`), the format has three parts: a header, a file table, and a name table that maps names to file entries.
+The format has three parts: a header, a file table, and a name table that maps names to file entries. The structure was reverse-engineered from the files themselves and later confirmed against header definitions that circulated in the scene.
 
 ```
 +-------------------+
@@ -181,4 +181,8 @@ xiptool -x default.xip output_dir/
 xiptool -c output_dir/ new_default.xip
 ```
 
-When extracting, the tool reassembles mesh entries (recombining split vertex/index buffer entries into complete `.xm` files). When creating, it packs all files in the directory into a new archive with the proper header, file table, and name table.
+When extracting, the tool reassembles mesh entries (recombining split vertex/index buffer entries into complete `.xm` files with their original MESHFILEHEADER). When creating, it splits `.xm` files back into IB+VB entries and auto-generates mesh reference entries so scripts can find meshes by name.
+
+A critical detail: the FILENAME directory must be **alphabetically sorted** (case-insensitive). The engine uses `bsearch()` to look up files by name, which requires sorted input. Early versions of community XIP tools didn't sort the directory, producing XIPs that looked valid but couldn't be loaded -- the binary search would miss entries that were out of order. Microsoft's original `xip.exe` build tool (found on a 3729 recovery disc in `mkxips.cmd`) handled this internally.
+
+The FILEDATA array (which stores offsets, sizes, and types) does NOT need to be sorted -- it's accessed by index, not by name. The FILENAME directory is a sorted index into the unsorted FILEDATA array. This separation means you can pack data in any order (IB first, VB second, generic files last) while maintaining fast name lookups.

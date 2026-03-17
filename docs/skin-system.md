@@ -1,6 +1,6 @@
-# The Skin System: A History
+# The Skin System: How It Works
 
-How the Xbox dashboard got skinnable -- from hex-patched color codes to a texture preloader built on an invisible 3D mesh.
+The technical side of how dashboard skins work -- the invisible mesh preloader trick, the texture lookup pipeline, and how colors and textures get swapped. For the full historical progression from tHc through Theseus, see **[The Lineage](lineage.md#skinning-from-hex-editing-to-live-switching)**.
 
 ## The Early Days: tHc and BSX (2002-2004)
 

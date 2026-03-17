@@ -1,12 +1,12 @@
 # XboxDash.NeT: Two Weeks in September
 
-XboxDash.NeT (also called Xbox Dash Next) sits at a specific point in the timeline: after tHc, tHc Lite, and BSX, but before the Commemorative merge and UIX. It's what happened when JbOnE stopped patching the retail XBE and started building on the source.
+XboxDash.NeT (also called Xbox Dash Next) sits at a specific point in the timeline: after tHc, tHc Lite, and BSX, but before the Commemorative merge and UIX. It's what happened when JbOnE stopped patching the retail XBE and started building a custom-compiled dashboard.
 
-tHC Final was the last purely hex-patched release. Then source access happened, and the tHc XIPs got adapted to run on a custom-compiled engine with real C++ objects backing the script functions. Xbox Dash Next is the compiled build of that work -- the bridge between tHc and what would become UIX.
+tHC Final was the last purely hex-patched release. After that, the tHc XIPs got adapted to run on a new engine with real C++ objects backing the script functions. Xbox Dash Next is the compiled build of that work -- the bridge between tHc and what would become UIX.
 
 ## Reading the Timestamps
 
-The source archive tells the story through file dates. Every file from the Xbox source leak is stamped `2002-02-01 19:50`. JbOnE's modifications are dated August 26 through September 12, 2004. Two weeks.
+The archive tells the story through file dates. The base Xbox dashboard files are all stamped `2002-02-01 19:50`. JbOnE's modifications are dated August 26 through September 12, 2004. Two weeks.
 
 **Untouched from the leak:**
 - The script VM (`Compiler.cpp`, `Lexer.cpp`, `Parser.cpp`) -- already worked fine

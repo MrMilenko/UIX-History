@@ -25,7 +25,7 @@ tHC Final (JbOnE)
     |
     v
 XboxDash.NeT / Xbox Dash Next (JbOnE, source-based)
-    |-- Got source access, adapted tHc XIPs to run on custom-compiled engine
+    |-- Custom-compiled engine, adapted tHc XIPs to run on it
     |-- Two-week sprint (Sept 2004): 50+ files modified, 13 drive mappings
     |-- Added engine objects: TitleMenu, HardDrive, XboxNetwork
     |-- Partial skin system (149 materials, boot-only)
