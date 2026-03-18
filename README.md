@@ -16,6 +16,8 @@ This is the story of what happened next.
 
 - **[The Lineage](docs/lineage.md)** -- tHc, BSX, UIX, UIX Lite, Theseus, UIX Desktop. How rival groups forked, fought, merged, and built on each other's code for 20 years.
 
+- **[Xbox Live and the 5960 Problem](docs/xbox-live.md)** -- Why the community ignored 5960 for fifteen years, and why [Insignia](https://insignia.live/) changed everything. CLiveAccounts disassembly, account crypto, SavedGameGrid expansion, EEPROM bit mapping -- all from the retail binary.
+
 ---
 
 ## Xbox Internals
