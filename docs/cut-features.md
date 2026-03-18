@@ -187,3 +187,11 @@ The `theTitleCollection` references (commented out but still present in alpha sc
 Seton Kim's REZN8 design concepts show that game browsing was part of the original dashboard vision. The UI made it through concept, design, 3D art, audio, and scripting before being cut in the summer of 2001.
 
 The community rebuilt it from scratch, using the music player's visual assets because they didn't know the game launcher's own meshes were sitting right there in MainMenu5.xip the whole time.
+
+## The Movies Pod
+
+The game launcher wasn't the only thing that got cut. The original MainMenu v1 (build 3424) was designed with **five** top-level sections: Games, Music, Movies, Memory, Settings. The Movies pod had full 3D geometry -- pod sphere, socket inner/outer, four support arms, mount, three shell pieces, and a backing panel -- all positioned and ready to render. But it was commented out before the alpha even shipped.
+
+No `movies.xap` has been found in any recovered build -- though that doesn't mean one was never written. The Movies pod was likely planned as a video content browser separate from the disc-triggered DVD player. It was the first casualty of the dashboard's scope reduction. By MainMenu2 (also in build 3424), Movies was gone entirely and the dashboard was down to four pods.
+
+The Movies pod was uncommented and rendered in UIX Desktop in 2026 by adding a text label and re-enabling the highlight in the Switch node. The geometry Microsoft built in 2001 renders correctly -- they just never shipped it.
