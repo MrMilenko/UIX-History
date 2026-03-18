@@ -4,6 +4,9 @@
 - **[Reverse Engineering the Xbox Dashboard](reverse-engineering.md)** -- From hex editors to IDA Pro and Ghidra. How the scene grew, went quiet, and came back.
 - **[The Lineage](lineage.md)** -- tHc, BSX, UIX, UIX Lite, Theseus, UIX Desktop. 20 years of forks and merges.
 
+## Xbox Live
+- **[Xbox Live and the 5960 Problem](xbox-live.md)** -- Why the community ignored 5960 for fifteen years, and why Insignia changed everything.
+
 ## Xbox Internals
 - **[Understanding the Xbox Dashboard](understanding-dashboard.md)** -- Power-on to green orb. The full technical walkthrough.
 - **[Dashboard Architecture](xbox-architecture.md)** -- Technical reference and common misconceptions.

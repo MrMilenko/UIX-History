@@ -39,7 +39,7 @@ Textures found on the build 3424 recovery disc, April 2001:
 *Test leaderboard with developer nicknames: ERGOMAN, SE7EN, JACKY, JON, JFFF, SPARKLES, DVDA, SUN ORBIT, REV SHARPTON, TONY, MANNIX.*
 
 ![Online leaderboard mockup](images/alpha-3424/hranking.png)
-*"Check where you rank IN THE WORLD. Check where you rank AMONG YOUR FRIENDS." Online leaderboards planned 18 months before Xbox Live launched.*
+*"Check where you rank IN THE WORLD. Check where you rank AMONG YOUR FRIENDS." Online leaderboards planned 19 months before Xbox Live launched.*
 
 ![Per-game menu mockup](images/alpha-3424/gamesoption.png)
 *Planned per-game detail menu: HIGH SCORES, NEW GAME, SAVED GAME, TIPS, UPDATES. "Tips" and "Updates" never shipped.*

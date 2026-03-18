@@ -78,7 +78,7 @@ This creates a panel containing a text label, a texture, and a 3D mesh backgroun
     |
     v
 [Runner VM] -- Executes bytecode at runtime
-               Stack-based, 100-element stack
+               Stack-based, 256-element stack
                Operations: push, pop, call, get/set property, arithmetic, string ops
 ```
 
@@ -115,7 +115,7 @@ The compiler (`Compiler.cpp`) converts script ASTs into bytecode. It handles:
 
 The runner (`Runner.cpp`, `Runner.h`) is a stack-based virtual machine:
 
-- **Stack**: Fixed array of 100 elements. Each element can hold a number, string, node reference, or array.
+- **Stack**: Fixed array of 256 elements. Each element can hold a number, string, node reference, or array.
 - **Execution**: The VM reads bytecode instructions sequentially, pushing/popping the stack.
 - **Property access**: When a script reads `myPanel.opacity`, the VM looks up the property in the node's reflection table and calls the registered getter function.
 - **Function calls**: When a script calls `myPanel.SetPosition(x, y, z)`, the VM pushes arguments, looks up the function in the reflection table, and calls the registered C++ function.
@@ -418,7 +418,7 @@ Title lists are serialized with `|` delimiters, segmented into chunks of 25 (bec
 
 ### The Main Menu Is Configurable
 
-Microsoft's main menu had four fixed items: Memory, Music, Settings, Xbox Live. UIX Lite's `default.xap` reads button labels and actions from `config.ini`:
+Microsoft's 5960 main menu had four fixed items: Memory, Music, Settings, Xbox Live. The fourth button was added alongside the Live integration in later dashboard builds. UIX Lite's `default.xap` makes all four configurable by reading button labels and actions from `config.ini`:
 
 ```javascript
 Button1Text = GetSavedValue("MainMenu", "Button1Text");

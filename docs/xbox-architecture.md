@@ -200,7 +200,16 @@ The `C:\`, `E:\`, `F:\`-`N:\` drive letter scheme that everyone associates with 
 
 ### "The Falloff Effect Is a Pixel Shader"
 
-It's not even a D3D vertex shader. It's raw NV2A GPU microcode -- hand-written instruction words compiled into C header files as DWORD arrays:
+It's a vertex shader, not a pixel shader -- but the way it ships is unusual. The shader source (`effect3.vsh`, found on a 3729 recovery disc) is standard D3D vertex shader assembly:
+
+```asm
+vs.1.0
+dp4 oPos.x, v0, c[0]    ; transform position
+dp3 r0.x, v1, c[22]      ; dot(normal, viewDir)
+mad oD0, r0.x, c[25], c[24]  ; falloff = normal * colorScale + colorBias
+```
+
+But in the retail XBE, these shaders are pre-compiled into DWORD arrays -- direct NV2A GPU instruction words embedded in C header files:
 
 ```c
 DWORD dwEffectVertexShader[] = {
@@ -211,7 +220,7 @@ DWORD dwEffectVertexShader[] = {
 };
 ```
 
-These are direct NV2A instruction words -- not HLSL, not assembly, not D3D shader bytecode. Microsoft wrote the dashboard's signature lighting effect in GPU machine code. There are five variants (`effect.h` through `effect4.h` plus `aniso.h`) for different vertex formats and material types. On desktop, this is all replaced by a GLSL vertex shader that does the same math.
+Microsoft wrote the shaders in D3D vertex shader assembly, compiled them to NV2A machine code, and shipped the compiled form as header files (`effect.h` through `effect4.h` plus `aniso.h`). Five variants for different vertex formats and material types. The assembly source only survived because it was left on a pre-retail recovery disc. On desktop, the same math is reimplemented as a GLSL fragment shader.
 
 ### "The Dashboard Is Basically a Menu"
 

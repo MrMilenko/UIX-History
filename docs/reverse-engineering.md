@@ -36,7 +36,7 @@ The Xbox modding scene was building custom dashboards almost immediately. **tHc*
 
 **User.Interface.X** was JbOnE's project -- a dashboard modification with custom XIP/XAP scripts and a skin system. When BlackStormX and tHc merged, they formed **TeamUIX**. The community built dozens of skins, pushed XAP scripting to its limits, and created tools for editing and repacking XIPs.
 
-The community settled on dashboard version **4920** as the standard base. It was stable and well-understood, but it predated Xbox Live. UIX had the same limitation from a different angle -- pre-Live codebase, no DLC, no modern memory UI. By the mid-2000s, community dashboards looked great but couldn't do everything a stock dashboard could.
+The community settled on dashboard version **4920** as the standard base. It was stable, well-understood, and had Xbox Live support -- but the community never used Live, so the custom XIPs and scripts were built without it in mind. UIX replaced stock scripts with community versions that didn't touch the Live integration. Later builds (5659, 5960) added improved Live features, DLC management, and a modern memory UI. By the mid-2000s, community dashboards looked great but couldn't do everything a stock 5960 dashboard could.
 
 The scene accepted this tradeoff. Xbox-Scene had an unwritten rule: **stay off Xbox Live.** Modding was for homebrew, backups, and customization.
 
@@ -118,6 +118,92 @@ These macros embedded property names, type information, and member offsets as st
 Class names came from error messages and debug strings baked into the XBE (`"Error in SavedGameGrid::selectUp"`, RTTI structures, vtable layouts). The `IMPLEMENT_NODE` macros embedded type names as literals. Between the node tables, error strings, and RTTI, enough of the class hierarchy was recoverable to reconstruct compilable C++.
 
 Modern RE tooling made an enormous difference. What would have taken months with a hex editor in 2003 could be done in days with IDA's decompiler and Ghidra's analysis in 2020. The ghidra-xbe extension handled the Xbox-specific parts -- XBE headers, kernel imports, SDK symbol matching -- so you could focus on the dashboard-specific code. Multiple dashboard versions (from the original launch revision through 5960) were cross-referenced to understand how subsystems evolved between builds.
+
+### Phase 5: Deep Binary Analysis
+
+As the reconstructed engine matured, the focus shifted from "can we get this to run" to "are we getting it right." The dashboard looked correct at a glance, but closer inspection kept turning up discrepancies -- colors slightly off, materials rendering flat instead of with transparency falloff, EEPROM settings reading from wrong addresses. The kind of bugs you only notice after staring at the real dashboard for years.
+
+Automated Ghidra scripts against the 5960 XBE exposed the scope of what needed fixing.
+
+#### The FND Table Structure
+
+Every node class exposes functions to the script VM through Function Descriptor (FND) tables. Early RE work found function name strings in the binary and mapped them to node classes. But the tables linking names to code addresses proved elusive -- scanning for 12-byte `{funcPtr, sig, namePtr}` entries returned nothing.
+
+The entries are 24 bytes, not 12. The Xbox compiler used a 16-byte general-purpose member function pointer:
+
+```
++0:  uint32 funcPtr       (4 bytes)
++4:  uint32 thisAdj       (4 bytes, always 0 for single inheritance)
++8:  uint32 vtableIdx     (4 bytes, always 0)
++12: uint32 vbaseOffset   (4 bytes, always 0)
++16: uint16 sig           (2 bytes -- calling convention enum)
++18: uint16 padding       (2 bytes)
++20: uint32 namePtr       (4 bytes -- pointer to UTF-16LE string)
+```
+
+On top of that, FND tables live in .bss -- uninitialized data, all zeros on disk. They're populated at runtime by init functions that write entries as `MOV` instruction immediates. No static data to scan.
+
+PRD (Property Descriptor) tables use plain integers, so they ARE statically initialized. A brute-force scan found 35 PRD tables with 299 property labels in one pass. FND tables required parsing the init functions themselves.
+
+#### Extracting Functions from Init Code
+
+The init functions inline constructors directly into struct memory:
+
+```asm
+MOV ESI, 0xC0F3FF6B          ; side = D3DCOLOR_RGBA(243, 255, 107, 192)
+MOV EDI, 0x0014C000          ; front = D3DCOLOR_RGBA(20, 192, 0, 0)
+MOV [EAX+0x04], 0x000294EC   ; name = "FlatSurfaces"
+MOV [EAX+0x0C], ESI          ; store side color
+MOV [EAX+0x10], EDI          ; store front color
+```
+
+Scanning .text for `C7 05` patterns targeting .bss, clustering by proximity, and walking each cluster with register tracking extracted **303 function labels across 25 node classes**. Every script-callable method in the dashboard, with exact code addresses. CConfig had 57. CSavedGameGrid had 36. CDVDPlayer had 35. CLiveAccounts -- the Xbox Live integration Microsoft added between 4920 and 5960 -- had 23 functions that the community's pre-Live codebase never needed.
+
+#### Material Colors
+
+The dashboard's visual identity -- green glow, translucent panels, falloff shading -- comes from ~130 named materials in `Material_Init()`. The community had been building skin files with color values extrapolated from screenshots and hex dumps. Some were close. Some weren't.
+
+The material constructors are inlined -- direct struct writes, no `PUSH`/`CALL`:
+
+```asm
+MOV dword ptr [EAX],    0x28BF4     ; vtable = CSolidMatInfo
+MOV byte ptr  [EAX+0C], 0xF9        ; R = 249
+MOV byte ptr  [EAX+0D], 0x98        ; G = 152
+MOV byte ptr  [EAX+0E], 0x19        ; B = 25
+MOV byte ptr  [EAX+0F], 0xB2        ; A = 178
+```
+
+The vtable address identifies the type: `0x28BF4` = CSolidMatInfo, `0x28BF0` = CFalloffMatInfo. This mattered because several materials had been typed wrong:
+
+| Material | What We Had | What the Binary Says |
+|----------|-------------|---------------------|
+| OrangeNavType | Solid, alpha 255 | Solid, **alpha 178** |
+| MemoryHeaderHilite | Solid (232,199,0) | **Falloff** (199,232,0) / (97,114,0) -- R/G swapped |
+| grill grey | Solid (32,32,32) | **Falloff** (32,32,32,0) / (64,64,64,255) |
+| grey | Solid (86,100,82) | **Falloff** (71,83,69,0) / (86,100,82,255) |
+| dark green panels falloff | Solid (5,35,5) | **Falloff** (0,0,0,0) / (5,35,5,255) |
+
+Three materials typed as solid were actually falloff -- completely different rendering paths. The falloff shader computes viewing-angle transparency; a solid material draws flat. Getting the type wrong loses the X-ray edge glow that defines the dashboard's look.
+
+22 materials in 5960 had no counterpart in 4920 at all -- Xbox Live UI: `LiveChrome`, `OrangeNavType`, `MemoryHeaderHilite`, `footer`, `highlight`, `button`, `image`, `live header`, `orangeEggGlow`, `MotdIcon`.
+
+#### EEPROM Settings
+
+`CConfig` functions read dashboard settings via kernel calls into the Xbox EEPROM. The binary showed that `GetLiveToday` and `GetAcceptedLegalInfo` read from the **same EEPROM location** (`XC_MISC_FLAGS = 0x11`) using different bits:
+
+```
+XC_MISC_FLAGS (0x11):
+  bit 2: LiveToday disabled (inverted -- 0 means enabled)
+  bit 3: Accepted legal info
+```
+
+The reconstructed engine had been using the wrong EEPROM type entirely. It worked on modded consoles because nobody checked the real value. With Insignia bringing Xbox Live back, getting these right stopped being academic.
+
+#### Closing the Gaps
+
+Cross-referencing the 303 binary functions against the reconstructed engine found functions that had been rebuilt from User.Interface.X's pre-Live codebase but never properly updated for 5960's Xbox Live additions. The `CSavedGameGrid` in particular had diverged -- Microsoft reorganized the memory manager to show DLC and Xbox Live accounts alongside saved games, partitioning the grid item index space sequentially: saves first, then DLC, then Live accounts. Functions like `IsSavedGameSelected()`, `IsDLContentSelected()`, and `IsXboxLiveAccountSelected()` check which partition the current selection falls in. The CKeyboard gained password masking for Xbox Live passcode entry. CMemoryMonitor added slot counting alongside block counting.
+
+These were all properly implemented from the 5960 disassembly and verified against the behavior described in the XAP scripts that call them.
 
 ### A Note on Leaked Code
 

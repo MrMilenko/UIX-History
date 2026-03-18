@@ -69,6 +69,45 @@ Two XIPs handle different jobs:
 
 The skin preloader works on Theseus because the C++ `FindObjectInXIP()` function checks the skin directory before looking in XIPs -- the same lookup order that made the original tHc trick work. `MaxMaterial` nodes in the scene graph resolve texture names through this pipeline, so any texture in the skin folder automatically overrides the matching XIP texture.
 
+### How Material Lookup Works (from the binary)
+
+When a `MaxMaterial` node's `name` property is set in a XAP script, the engine calls `LookupMatInfo()` (at `0x0005A130` in the 5960 binary). This function resolves a material name string to its rendering properties using a binary search over the sorted `g_rgMatInfo` array:
+
+```asm
+; LookupMatInfo -- called when a MaxMaterial "name" is set
+0005A133: MOV EAX, [ESI + 0xA0]            ; cached matinfo pointer
+0005A139: TEST EAX, EAX                     ; already looked up?
+0005A13B: JNZ  0x0005A17D                   ; yes, skip to setup
+
+; First lookup: binary search the global material table
+0005A13D: MOV EAX, [ESI + 0x90]            ; material name string
+0005A147: MOV ECX, [0x0017E754]            ; g_nMatInfoCount
+0005A14D: PUSH 0x57C90                      ; compare function
+0005A152: PUSH 0x4                          ; element size (4-byte pointer)
+0005A154: PUSH ECX                          ; count
+0005A155: PUSH 0x17C6B8                     ; g_rgMatInfo array base
+0005A15A: PUSH EAX                          ; search key (material name)
+0005A15B: CALL 0x00074040                   ; bsearch()
+```
+
+After the match, the function checks if the material is a tube variant -- tubes use a different falloff shader mode:
+
+```asm
+; Check tube materials for shader variant selection
+0005A1B2: PUSH 0x2917C                      ; "Tubes"
+0005A1B7: PUSH EDX                          ; material name
+0005A1B8: CALL 0x00073412                   ; wcscmp
+0005A1C0: TEST EAX, EAX
+0005A1C2: JZ   0x0005A216                   ; match -> set tube shader flag
+0005A1CA: PUSH 0x29138                      ; "TubesFade"
+        ...
+0005A1E2: PUSH 0x29128                      ; "TubesQ"
+        ...
+0005A1FA: PUSH 0x2910C                      ; "Tube"
+```
+
+This is the pipeline that makes skins work: material names are resolved by binary search against a sorted global table (sorted by `qsort` during `Material_Init`), and the resolved material info controls the rendering properties. A skin overrides the texture bound to a material name, but the material TYPE (solid, falloff, aniso) comes from this compiled lookup table -- which is why getting the material types right matters.
+
 ## On Desktop
 
 UIX Desktop's skin system is the same pipeline -- `FindObjectInXIP()` checks `Q:\Skins\Stock\` first, then falls back to the XIP contents. The Stock skin folder contains `.xbx` textures that override the XIP defaults. This is how alpha dashboard builds from 2001 can render with modern skin textures: the alpha XIPs provide the geometry and base materials, the Stock skin folder overrides the textures where material names match.

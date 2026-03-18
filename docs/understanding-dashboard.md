@@ -123,7 +123,7 @@ opAssign "visible" // set property
 
 ### Runtime
 
-The script VM (CRunner) executes bytecode one instruction at a time. It supports:
+The script VM (`CRunner`) executes bytecode one instruction at a time. It supports:
 
 - **Variables**: local, instance, and global scope
 - **Control flow**: if/else, for, while, break, return
@@ -132,7 +132,18 @@ The script VM (CRunner) executes bytecode one instruction at a time. It supports
 - **Sleep**: `sleep(seconds)` pauses execution and resumes next frame
 - **Eval**: `eval(string)` compiles and executes a string as code at runtime
 
-Each node can have a `behavior` -- a CRunner instance that executes attached script functions. When a Joystick node detects a button press, it calls `CallFunction(node, "OnADown")`, which looks up the function in the node's script, creates a runner, and executes the bytecode.
+The main interpreter loop (at `0x0002F6EA` in the 5960 binary) reads a 16-bit opcode and dispatches through a 30-entry jump table:
+
+```asm
+0002F6DD: MOVZX EAX, word ptr [EAX + 0x10]  ; read opcode from bytecode stream
+0002F6E1: CMP   EAX, 0x1D                    ; 29 = max valid opcode
+0002F6E4: JA    0x0003008A                    ; invalid opcode -> error
+0002F6EA: JMP   dword ptr [EAX*4 + 0x30148]  ; dispatch via jump table
+```
+
+The jump table at `0x00030148` maps opcode numbers to handler addresses: opcode 0 handles `opThis`, opcode 1 handles `opDot`, opcode 2 handles `opAssign`, and so on through 29 opcodes covering every operation the script language supports. A second jump table (at `0x000385C4`, 20 entries) handles arithmetic and comparison operators with float-aware dispatch using SSE instructions.
+
+Each node can have a `behavior` -- a CRunner instance that executes attached script functions. When a Joystick node detects a button press, it calls `CallFunction(node, "OnADown")`, which looks up the function in the node's script, creates a runner, and starts the dispatch loop.
 
 ### Built-in Objects
 

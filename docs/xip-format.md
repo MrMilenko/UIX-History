@@ -82,6 +82,55 @@ Microsoft's `xipsign` tool (found at `xbox/ui/private/xipsign/`) computed HMAC s
 
 Every dashboard version checked these signatures before loading XIPs. When the modding community started patching out the check, Microsoft responded by moving the signature verification code to different locations in the XBE with each dashboard update. The community would find the new location, NOP out the branch, and the cycle would repeat. Once you could run unsigned XBEs (via modchip or softmod), the XIP signatures were just a single branch instruction to patch out -- wherever Microsoft hid it.
 
+### How the XIP Loader Works
+
+The XIP loading function (`CFileBuffer::SetFile`, at `0x0003DF54` in the 5960 binary) validates and parses the archive in a specific sequence. The first thing it checks is the magic number:
+
+```asm
+0003DF6C: PUSH ESI                          ; header buffer
+0003DF6D: CALL 0x0003D710                   ; ReadFile (16 bytes = XIP header)
+0003DF72: TEST EAX, EAX
+0003DF74: JZ   0x0003DFF3                   ; read failed -> bail
+0003DF76: CMP  dword ptr [ESI], 0x30504958  ; compare against "XIP0" magic
+0003DF7C: JNZ  0x0003DFF3                   ; not XIP0 -> bail
+```
+
+If the magic passes, it reads the three directory sections using counts and sizes from the header:
+
+```asm
+; Read FILEDATA entries (header+0x10 = count, each entry 16 bytes)
+0003DF7E: MOVZX EDX, word ptr [EDI + 0x10]  ; FILEDATA count
+0003DF82: SHL   EDX, 0x4                     ; count * 16 = total bytes
+0003DF85: PUSH  EDX
+0003DF86: CALL  0x00072D2C                   ; malloc(count * 16)
+
+; Read FILENAME entries (header+0x12 = count, each entry 4 bytes)
+0003DFA3: MOVZX EDX, word ptr [EDI + 0x12]  ; FILENAME count
+0003DFA7: SHL   EDX, 0x2                     ; count * 4 = total bytes
+
+; Read name strings block (remaining bytes after directories)
+0003DFC8: MOVZX EDX, word ptr [EDI + 0x10]  ; FILEDATA count
+0003DFCC: MOVZX EAX, word ptr [EDI + 0x12]  ; FILENAME count
+0003DFD0: MOV   ESI, [EDI + 0x0C]           ; total file size
+0003DFD3: LEA   ECX, [EAX + EDX*4 + 4]      ; header + directories size
+0003DFD7: SHL   ECX, 0x2                     ; in bytes
+0003DFDA: SUB   ESI, ECX                     ; remaining = name strings
+```
+
+File lookups use `bsearch` on the sorted FILENAME directory:
+
+```asm
+; FindFileInXIP -- binary search on FILENAME entries
+0003E2D2: PUSH  0x3E270                      ; compare function (string compare)
+0003E2D7: PUSH  0x4                          ; element size (4 bytes per FILENAME entry)
+0003E2E4: PUSH  EDX                          ; FILENAME count
+0003E2E9: PUSH  EAX                          ; FILENAME array base
+0003E2EE: PUSH  ECX                          ; search key (filename string)
+0003E2EF: CALL  0x00074040                   ; bsearch()
+```
+
+This is why XIP tools must sort the FILENAME directory alphabetically -- the engine uses `bsearch()`, which requires sorted input. An unsorted directory produces lookup failures and missing assets.
+
 ## File Formats Inside a XIP
 
 ### XAP Scripts (.xap) -- Type 0
